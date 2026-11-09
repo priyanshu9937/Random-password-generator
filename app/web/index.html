@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f8f7f3">
+    <meta name="description" content="Generate unique, cryptographically secure passwords locally with Securely.">
+    <title>Securely — passwords, made thoughtfully</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script src="/assets/app.js" defer></script>
+  </head>
+  <body>
+    <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2.8 14.1 9.9 21.2 12l-7.1 2.1L12 21.2l-2.1-7.1L2.8 12l7.1-2.1L12 2.8Z"/><path d="m19 2 .8 2.2L22 5l-2.2.8L19 8l-.8-2.2L16 5l2.2-.8L19 2Z"/></symbol>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="m3.5 10 8.5-7 8.5 7v10a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 20V10Z"/><path d="M9 21.5v-8h6v8"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 1 1 8 0v3"/><path d="M12 14.5v2.8"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.7a8.2 8.2 0 0 1-1.4.8l-.3 1.8h-2.8l-.3-1.8a8.2 8.2 0 0 1-1.5-.8l-1.6.7-1.4-2.4 1.4-1.1a7 7 0 0 1 0-1.8l-1.4-1.1 1.4-2.4 1.6.7a8.2 8.2 0 0 1 1.5-.8l.3-1.8h2.8l.3 1.8a8.2 8.2 0 0 1 1.4.8l1.7-.7 1.4 2.4-1.4 1.1a7 7 0 0 1 0 1.7Z"/></symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12s3.2-6 9.5-6 9.5 6 9.5 6-3.2 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+      <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="m3 3 18 18"/><path d="M10.6 6.2A10.7 10.7 0 0 1 12 6c6.3 0 9.5 6 9.5 6a16.2 16.2 0 0 1-3.1 3.8"/><path d="M6.2 6.2C3.8 7.7 2.5 12 2.5 12s3.2 6 9.5 6a9.7 9.7 0 0 0 3-.5"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2"/></symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5"/><path d="M4.6 9a8 8 0 0 1 13-2l2.4 2"/><path d="M4 17v-5h5"/><path d="M19.4 15a8 8 0 0 1-13 2L4 15"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    </svg>
+
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <a class="brand" href="#generator" data-route="generator" aria-label="Securely home">
+          <span class="brand-mark" aria-hidden="true"><svg><use href="#i-lock"/></svg><i></i></span>
+          <span class="brand-copy"><strong>securely<span>.</span></strong><small>YOUR PRIVATE WORKSHOP</small></span>
+        </a>
+
+        <p class="nav-caption">WORKSPACE</p>
+        <nav class="side-nav">
+          <a class="nav-link" href="#dashboard" data-route="dashboard"><svg><use href="#i-home"/></svg><span>Dashboard</span></a>
+          <a class="nav-link active" href="#generator" data-route="generator" aria-current="page"><svg><use href="#i-spark"/></svg><span>Password generator</span></a>
+          <a class="nav-link" href="#history" data-route="history"><svg><use href="#i-clock"/></svg><span>Password history</span><span class="nav-count" id="history-count">0</span></a>
+          <a class="nav-link" href="#guide" data-route="guide"><svg><use href="#i-shield"/></svg><span>Security guide</span></a>
+          <a class="nav-link" href="#settings" data-route="settings"><svg><use href="#i-settings"/></svg><span>Settings</span></a>
+          <a class="nav-link" href="#about" data-route="about"><svg><use href="#i-info"/></svg><span>About Securely</span></a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="privacy-card">
+            <span class="privacy-icon"><svg><use href="#i-shield"/></svg></span>
+            <strong>Just between us.</strong>
+            <p>Your passwords stay on this device. Nothing is saved after this session.</p>
+            <span class="privacy-status"><i></i> LOCAL &amp; PRIVATE</span>
+          </div>
+          <span class="sidebar-version">SECURELY STUDIO <span>·</span> 1.0</span>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <button class="mobile-menu icon-button" id="mobile-menu" type="button" aria-label="Open navigation" aria-expanded="false">
+            <svg class="menu-icon"><use href="#i-menu"/></svg><svg class="close-icon"><use href="#i-close"/></svg>
+          </button>
+          <div class="breadcrumb"><span>YOUR WORKSPACE</span><i>/</i><strong id="breadcrumb-current">GENERATOR</strong></div>
+          <div class="topbar-right">
+            <span class="connection-pill"><i></i> LOCAL SESSION</span>
+            <span class="avatar" aria-label="Securely">S</span>
+          </div>
+        </header>
+
+        <div class="page-scroll" id="page-scroll">
+          <section class="view active" id="view-generator" data-view="generator">
+            <div class="page-heading reveal">
+              <div>
+                <p class="eyebrow">A BETTER KIND OF PASSWORD HABIT</p>
+                <h1 id="page-title">Good passwords,<br><em>less to worry about.</em></h1>
+                <p class="page-intro">Create a strong, one-of-a-kind password in a few thoughtful clicks. Your passwords never leave this device.</p>
+              </div>
+              <div class="heading-note"><span class="heading-note-icon"><svg><use href="#i-sun"/></svg></span><span>Take care<br>out there.</span></div>
+            </div>
+
+            <section class="generator-hero reveal" aria-labelledby="studio-title">
+              <div class="hero-copy">
+                <div class="hero-kicker"><span class="sparkle">✳</span> YOUR PERSONAL PASSWORD WORKSHOP</div>
+                <h2 id="studio-title">Your Password<br>Studio<span>.</span></h2>
+                <p>Create strong, unique and secure passwords in seconds.</p>
+                <div class="hero-trust"><svg><use href="#i-lock"/></svg> Made locally. Kept private.</div>
+              </div>
+              <div class="hero-art" aria-hidden="true">
+                <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+                <div class="art-spark art-spark-one">✦</div><div class="art-spark art-spark-two">✳</div>
+                <div class="lock-illustration">
+                  <div class="lock-loop"></div><div class="lock-body"><span></span><i></i></div>
+                  <div class="lock-shine"></div>
+                </div>
+                <span class="art-dot dot-one"></span><span class="art-dot dot-two"></span>
+              </div>
+              <div class="password-workspace">
+                <label class="sr-only" for="password-output">Generated password</label>
+                <div class="password-field">
+                  <span class="field-lock"><svg><use href="#i-lock"/></svg></span>
+                  <input id="password-output" type="password" value="" readonly placeholder="Your new password will appear here" autocomplete="off" spellcheck="false">
+                  <button class="reveal-button icon-button" id="toggle-password" type="button" aria-label="Show password" aria-pressed="false">
+                    <svg class="eye-open"><use href="#i-eye"/></svg><svg class="eye-closed"><use href="#i-eye-off"/></svg>
+                  </button>
+                  <button class="copy-button" id="copy-password" type="button"><svg><use href="#i-copy"/></svg><span>Copy</span></button>
+                </div>
+                <div class="hero-actions">
+                  <button class="button button-coral button-generate" id="generate-password" type="button"><svg><use href="#i-spark"/></svg><span>Generate password</span><kbd>↵</kbd></button>
+                  <button class="button button-lavender" id="regenerate-password" type="button" aria-label="Generate another password"><svg><use href="#i-refresh"/></svg></button>
+                  <span class="auto-copy-note"><svg><use href="#i-check"/></svg> Copies automatically</span>
+                </div>
+              </div>
+            </section>
+
+            <div class="workspace-grid reveal">
+              <section class="settings-section" aria-labelledby="settings-title">
+                <div class="section-heading">
+                  <div><p class="eyebrow">MADE TO FIT</p><h2 id="settings-title">Your preferences</h2></div>
+                  <span class="section-ornament" aria-hidden="true">✳</span>
+                </div>
+                <div class="length-panel">
+                  <div class="length-heading"><label for="length-slider">Password length</label><output class="length-value" id="length-value" for="length-slider">16 characters</output></div>
+                  <input id="length-slider" class="range-slider" type="range" min="8" max="128" value="16">
+                  <div class="range-labels"><span>8 characters</span><span>128 characters</span></div>
+                </div>
+                <div class="category-grid" aria-label="Character categories">
+                  <label class="category-card category-uppercase">
+                    <span class="category-symbol">Aa</span><span class="category-copy"><strong>Uppercase</strong><small>A–Z letters</small></span>
+                    <input type="checkbox" name="category" value="uppercase" checked><span class="toggle" aria-hidden="true"></span>
+                  </label>
+                  <label class="category-card category-lowercase">
+                    <span class="category-symbol">ab</span><span class="category-copy"><strong>Lowercase</strong><small>a–z letters</small></span>
+                    <input type="checkbox" name="category" value="lowercase" checked><span class="toggle" aria-hidden="true"></span>
+                  </label>
+                  <label class="category-card category-numbers">
+                    <span class="category-symbol">09</span><span class="category-copy"><strong>Numbers</strong><small>0–9 digits</small></span>
+                    <input type="checkbox" name="category" value="numbers" checked><span class="toggle" aria-hidden="true"></span>
+                  </label>
+                  <label class="category-card category-symbols">
+                    <span class="category-symbol">!?</span><span class="category-copy"><strong>Symbols</strong><small>Special characters</small></span>
+                    <input type="checkbox" name="category" value="symbols" checked><span class="toggle" aria-hidden="true"></span>
+                  </label>
+                </div>
+                <p class="validation-message" id="category-warning" role="status" hidden>Select at least two character groups to make a password.</p>
+                <label class="ambiguous-option">
+                  <input type="checkbox" id="exclude-ambiguous">
+                  <span class="custom-check" aria-hidden="true"><svg><use href="#i-check"/></svg></span>
+                  <span><strong>Skip look-alike characters</strong><small>0, O, 1, l and I can be tricky to tell apart.</small></span>
+                </label>
+              </section>
+
+              <aside class="side-column">
+                <section class="strength-card" aria-labelledby="strength-title">
+                  <div class="strength-top"><span class="strength-icon"><svg><use href="#i-shield"/></svg></span><span class="strength-overline">A FRIENDLY CHECK</span></div>
+                  <div class="strength-title-row"><h2 id="strength-title">Password strength</h2><span class="strength-label" id="strength-label">NOT YET</span></div>
+                  <div class="strength-track" id="strength-track" role="progressbar" aria-label="Educational password strength estimate" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="strength-fill"></span></div>
+                  <p class="strength-message" id="strength-message">Make a password to see a little strength check.</p>
+                  <p class="estimate-note">An educational guide, not a formal security assessment.</p>
+                </section>
+                <section class="tip-card">
+                  <span class="tip-mark" aria-hidden="true">“</span>
+                  <p>A different password for every account is a small kindness to your future self.</p>
+                  <a href="#guide" data-route="guide">A few more good habits <svg><use href="#i-arrow"/></svg></a>
+                </section>
+              </aside>
+            </div>
+
+            <section class="recent-section reveal" aria-labelledby="recent-title">
+              <div class="section-heading recent-heading">
+                <div><p class="eyebrow">JUST FOR THIS SESSION</p><h2 id="recent-title">Recently Generated</h2></div>
+                <button class="text-button" id="view-history" type="button">View all <svg><use href="#i-arrow"/></svg></button>
+              </div>
+              <div class="history-list" id="recent-list"><div class="empty-state"><span class="empty-icon"><svg><use href="#i-spark"/></svg></span><p>Your recent passwords will be waiting here.</p><small>They stay in memory only, and disappear when you close the app.</small></div></div>
+            </section>
+            <footer class="page-footer"><span>Securely <i>·</i> thoughtfully made</span><span><svg><use href="#i-lock"/></svg> Your passwords never leave this device.</span></footer>
+          </section>
+
+          <section class="view" id="view-history-page" data-view="history" hidden>
+            <div class="page-heading compact-heading"><div><p class="eyebrow">JUST FOR THIS SESSION</p><h1>Recently <em>Generated.</em></h1><p class="page-intro">A little record of your latest passwords. Nothing is saved to disk.</p></div></div>
+            <section class="full-history-panel"><div class="section-heading"><div><p class="eyebrow">PRIVATE BY DESIGN</p><h2>Your password history</h2></div><button class="button button-outline" id="clear-history" type="button">Clear history</button></div><div class="history-list" id="full-history-list"></div></section>
+            <div class="privacy-banner"><svg><use href="#i-shield"/></svg><p><strong>Only in this session.</strong> History lives in the running app's memory and is cleared when you close it.</p></div>
+          </section>
+
+          <section class="view" id="view-settings" data-view="settings" hidden>
+            <div class="page-heading compact-heading"><div><p class="eyebrow">YOUR DEFAULTS, YOUR WAY</p><h1>A password that <em>fits.</em></h1><p class="page-intro">Preferences take effect right away and stay in this browser session.</p></div></div>
+            <section class="settings-page-panel">
+              <div class="section-heading"><div><p class="eyebrow">PASSWORD PREFERENCES</p><h2>Choose your starting point</h2></div><span class="settings-badge">SESSION ONLY</span></div>
+              <div class="settings-length">
+                <div class="length-heading"><label for="settings-length">Default password length</label><output class="length-value" id="settings-length-value" for="settings-length">16 characters</output></div>
+                <input id="settings-length" class="range-slider" type="range" min="8" max="128" value="16">
+                <div class="range-labels"><span>8 characters</span><span>128 characters</span></div>
+              </div>
+              <h3 class="settings-subheading">Character groups</h3>
+              <div class="settings-category-grid">
+                <label class="category-card category-uppercase"><span class="category-symbol">Aa</span><span class="category-copy"><strong>Uppercase</strong><small>A–Z letters</small></span><input type="checkbox" name="category-setting" value="uppercase" checked><span class="toggle" aria-hidden="true"></span></label>
+                <label class="category-card category-lowercase"><span class="category-symbol">ab</span><span class="category-copy"><strong>Lowercase</strong><small>a–z letters</small></span><input type="checkbox" name="category-setting" value="lowercase" checked><span class="toggle" aria-hidden="true"></span></label>
+                <label class="category-card category-numbers"><span class="category-symbol">09</span><span class="category-copy"><strong>Numbers</strong><small>0–9 digits</small></span><input type="checkbox" name="category-setting" value="numbers" checked><span class="toggle" aria-hidden="true"></span></label>
+                <label class="category-card category-symbols"><span class="category-symbol">!?</span><span class="category-copy"><strong>Symbols</strong><small>Special characters</small></span><input type="checkbox" name="category-setting" value="symbols" checked><span class="toggle" aria-hidden="true"></span></label>
+              </div>
+              <label class="ambiguous-option settings-ambiguous"><input type="checkbox" id="settings-exclude-ambiguous"><span class="custom-check" aria-hidden="true"><svg><use href="#i-check"/></svg></span><span><strong>Skip look-alike characters</strong><small>Exclude 0, O, 1, l and I from generated passwords.</small></span></label>
+              <div class="settings-footer"><p>We'll remember these choices while Securely is open.</p><a class="button button-coral" href="#generator" data-route="generator">Back to your studio <svg><use href="#i-arrow"/></svg></a></div>
+            </section>
+          </section>
+
+          <section class="view" id="view-guide" data-view="guide" hidden>
+            <div class="page-heading compact-heading"><div><p class="eyebrow">A FEW THOUGHTFUL REMINDERS</p><h1>Security can be <em>simple.</em></h1><p class="page-intro">You don't need to be an expert to make your accounts harder to guess.</p></div></div>
+            <div class="guide-grid">
+              <article class="guide-item guide-peach"><span class="guide-number">01</span><span class="guide-icon">↗</span><h2>Make it long</h2><p>Length gives a password more possible combinations to resist guessing. When in doubt, make it longer.</p></article>
+              <article class="guide-item guide-lavender"><span class="guide-number">02</span><span class="guide-icon">≠</span><h2>Keep every password unique</h2><p>One password per account means a leaked login can't unlock all the others.</p></article>
+              <article class="guide-item guide-mint"><span class="guide-number">03</span><span class="guide-icon">Aa</span><h2>Add a little variety</h2><p>Mix uppercase, lowercase, numbers and symbols. This generator includes each group you select.</p></article>
+              <article class="guide-item guide-blue"><span class="guide-number">04</span><span class="guide-icon">⌑</span><h2>Keep it to yourself</h2><p>A password is a secret key. Avoid sending it through chat or email, and be aware of clipboard access.</p></article>
+              <article class="guide-item guide-yellow"><span class="guide-number">05</span><span class="guide-icon">▤</span><h2>Use a password manager</h2><p>A trusted manager can create and remember unique credentials so you don't need to reuse them.</p></article>
+              <article class="guide-item guide-coral"><span class="guide-number">06</span><span class="guide-icon">✓</span><h2>Turn on another layer</h2><p>Multi-factor authentication adds another check to help protect your accounts.</p></article>
+            </div>
+          </section>
+
+          <section class="view" id="view-about" data-view="about" hidden>
+            <div class="page-heading compact-heading"><div><p class="eyebrow">LOCAL, PRIVATE, THOUGHTFUL</p><h1>A little more <em>peace of mind.</em></h1><p class="page-intro">Securely is a small password workshop for making unique credentials without sharing them with a service.</p></div></div>
+            <section class="about-panel"><div class="about-emblem"><span class="emblem-ring"></span><span class="emblem-lock"><svg><use href="#i-lock"/></svg></span><i class="emblem-star">✳</i></div><div><p class="eyebrow">SECURELY · VERSION 1.0</p><h2>Made with privacy at heart.</h2><p>Passwords are created locally using Python's <code>secrets</code> module, designed for security-sensitive randomness. A short in-memory history is available only while the local app is running.</p><div class="about-facts"><span><svg><use href="#i-check"/></svg> No account required</span><span><svg><use href="#i-check"/></svg> No password storage</span><span><svg><use href="#i-check"/></svg> No external password service</span></div></div></section>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"><span class="toast-check"><svg><use href="#i-check"/></svg></span><span id="toast-message"></span></div>
+  </body>
+</html>
